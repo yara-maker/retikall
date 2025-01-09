@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Support - Retikall</title>
+   <link rel="stylesheet" href="styles.css"> <!-- You can add your own CSS styles here -->
+   <style>
+       body {
+           font-family: Arial, sans-serif;
+           margin: 20px;
+           padding: 20px;
+           background-color: #f4f4f4;
+       }
+       h1 {
+           color: #333;
+       }
+       .contact-info {
+           background-color: #fff;
+           padding: 20px;
+           border-radius: 5px;
+           box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+       }
+       .contact-info h2 {
+           color: #007BFF;
+       }
+       .chatbot {
+           margin-top: 20px;
+       }
+
+       /* Chatbot styles */
+       .chatbot-container {
+           position: fixed;
+           bottom: 20px;
+           right: 20px;
+           width: 350px;
+           max-height: 500px;
+           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+           border-radius: 8px;
+           overflow: hidden;
+           display: flex;
+           flex-direction: column;
+           background-color: white;
+       }
+       .chat-header {
+           background-color: #0078d7;
+           color: white;
+           padding: 10px;
+           font-size: 16px;
+           text-align: center;
+       }
+       .chat-body {
+           flex: 1;
+           overflow-y: auto;
+           padding: 10px;
+       }
+       .chat-message {
+           margin: 5px 0;
+           padding: 10px;
+           border-radius: 5px;
+       }
+       .bot-message {
+           background-color: #0078d7;
+           color: white;
+           margin-bottom: 10px;
+       }
+       .questions-list {
+           list-style-type: none;
+           padding: 0;
+       }
+       .questions-list li {
+           background-color: #f0f0f0;
+           margin: 5px 0;
+           padding: 10px;
+           border-radius: 5px;
+           cursor: pointer;
+       }
+       .questions-list li:hover {
+           background-color: #ddd;
+       }
+   </style>
+</head>
+<body>
+
+   <h1>Support Page</h1>
+   <div class="contact-info">
+       <h2>Contact Us</h2>
+       <p>If you have any questions or need assistance, feel free to reach out to us:</p>
+       <p><strong>Email:</strong> support@retikall.com</p>
+       <p><strong>Phone:</strong> +1 (234) 567-8901</p>
+   </div>
+
+   <div class="chatbot">
+       <h2>Talk to Our Chatbot</h2>
+       <p>For immediate assistance, you can chat with our support bot:</p>
+       <button onclick="openChatbot()">Open Chatbot</button>
+   </div>
+
+   <!-- Chatbot Container -->
+   <div class="chatbot-container" id="chatbotContainer" style="display: none;">
+       <div class="chat-header">Retikall Chatbot</div>
+       <div class="chat-body" id="chatBody">
+           <div class="chat-message bot-message">Hi! I'm Retikall's chatbot. Choose a question below to get started:</div>
+           <ul class="questions-list" id="questionsList">
+               <li onclick="sendQuestion(this)">What products are available on Retical?</li>
+               <li onclick="sendQuestion(this)">What is the price of the iPhone 16 Pro Max?</li>
+               <li onclick="sendQuestion(this)">What is the price of the Samsung S24 Ultra?</li>
+               <li onclick="sendQuestion(this)">Can you compare the iPhone 16 Pro Max and Samsung S24 Ultra?</li>
+               <li onclick="sendQuestion(this)">What are the main features of the iPhone 16 Pro Max?</li>
+               <li onclick="sendQuestion(this)">Can you describe the Samsung S24 Ultra?</li>
+               <li onclick="sendQuestion(this)">What colors are available for the iPhone 16 Pro Max?</li>
+               <li onclick="sendQuestion(this)">Can you list the colors of the Samsung S24 Ultra?</li>
+               <li onclick="sendQuestion(this)">How can I buy the Samsung S24 Ultra?</li>
+               <li onclick="sendQuestion(this)">Is there a warranty for the phones sold on Retical?</li>
+           </ul>
+       </div>
+   </div>
+
+   <script>
+       function openChatbot() {
+           document.getElementById('chatbotContainer').style.display = 'flex';
+       }
+
+       const responses = {
+           "What products are available on Retical?": "Retical offers two flagship smartphones: the iPhone 16 Pro Max and the Samsung S24 Ultra.",
+           "What is the price of the iPhone 16 Pro Max?": "The iPhone 16 Pro Max is priced at $1600.",
+           "What is the price of the Samsung S24 Ultra?": "The Samsung S24 Ultra is priced at $1400.",
+           "Can you compare the iPhone 16 Pro Max and Samsung S24 Ultra?": "Both phones are high-end flagships with incredible features. The iPhone 16 Pro Max excels in performance and camera optimization, while the Samsung S24 Ultra shines in versatility and display quality.",
+           "What are the main features of the iPhone 16 Pro Max?": "The iPhone 16 Pro Max features a 6.9-inch Super Retina XDR display, an A18 Bionic chip, a triple-lens camera system with a 48MP main sensor, 5G connectivity, and an all-day battery life.",
+           "Can you describe the Samsung S24 Ultra?": "The Samsung S24 Ultra features a 6.8-inch Dynamic AMOLED 2X display, a quad-camera setup with a 200MP main sensor, S Pen integration, and long battery life with fast charging support.",
+           "What colors are available for the iPhone 16 Pro Max?": "The iPhone 16 Pro Max is available in Black, White, Pink, Blue, and Red.",
+           "Can you list the colors of the Samsung S24 Ultra?": "The Samsung S24 Ultra is also available in Black, White, Pink, Blue, and Red.",
+           "How can I buy the Samsung S24 Ultra?": "You can purchase the Samsung S24 Ultra directly on Retical’s website.",
+           "Is there a warranty for the phones sold on Retical?": "Yes, all phones sold on Retical come with a standard manufacturer’s warranty."
+       };
+
+       function sendQuestion(element) {
+           const question = element.textContent;
+
+           // Display user question
+           const chatBody = document.getElementById("chatBody");
+           const userMessageDiv = document.createElement("div");
+           userMessageDiv.className = "chat-message bot-message";
+           userMessageDiv.textContent = question;
+           chatBody.appendChild(userMessageDiv);
+
+           // Display bot response
+           const botResponse = responses[question] || "I'm sorry, I don't have an answer for that.";
+           const botMessageDiv = document.createElement("div");
+           botMessageDiv.className = "chat-message bot-message";
+           botMessageDiv.textContent = botResponse;
+           chatBody.appendChild(botMessageDiv);
+
+           // Scroll to the bottom
+           chatBody.scrollTop = chatBody.scrollHeight;
+       }
+   </script>
+
+</body>
+</html>
